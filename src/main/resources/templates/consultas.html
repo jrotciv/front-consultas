@@ -64,6 +64,7 @@
                     <th>Observações</th>
                     <th>Médico</th>
                     <th>Paciente</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,17 +78,23 @@
                     <td th:text="${consulta.observacoes}"></td>
                     <td th:text="${consulta.medico.nome}"></td>
                     <td th:text="${consulta.paciente.nome}"></td>
+                    <td>
+                        <button type="button" class="btn btn-custom btn-sm" data-bs-toggle="modal" data-bs-target="#editConsultaModal" 
+                            th:attr="data-id=${consulta.id}, data-data=${consulta.data}, data-horario=${consulta.horario}, data-sintomas=${consulta.sintomas}, data-diagnostico=${consulta.diagnostico}, data-observacoes=${consulta.observacoes}">
+                            Editar
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <!-- Modal para criar consulta -->
     <div class="table-container text-end">
         <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#createConsultaModal">
             Criar Consulta
         </button>
     </div>
-    
-        <!-- Modal -->
     <div class="modal fade" id="createConsultaModal" tabindex="-1" aria-labelledby="createConsultaModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -117,6 +124,47 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar consulta -->
+    <div class="modal fade" id="editConsultaModal" tabindex="-1" aria-labelledby="editConsultaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="editConsultaForm" action="/consultas/editar" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editConsultaModalLabel">Editar Consulta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="edit-id" name="id">
+                        <div class="mb-3">
+                            <label for="edit-data" class="form-label">Data</label>
+                            <input type="date" class="form-control" id="edit-data" name="data" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-horario" class="form-label">Horário</label>
+                            <input type="time" class="form-control" id="edit-horario" name="horario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-sintomas" class="form-label">Sintomas</label>
+                            <input type="text" class="form-control" id="edit-sintomas" name="sintomas" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-diagnostico" class="form-label">Diagnóstico</label>
+                            <input type="text" class="form-control" id="edit-diagnostico" name="diagnostico" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-observacoes" class="form-label">Observações</label>
+                            <input type="text" class="form-control" id="edit-observacoes" name="observacoes" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </div>
                 </form>
             </div>
