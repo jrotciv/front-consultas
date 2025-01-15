@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.uff.front_consultas.dto.CadastroUsuarioDTO;
 import com.uff.front_consultas.service.UsuarioService;
 
 import jakarta.servlet.http.HttpSession;
@@ -35,5 +36,22 @@ public class UsuarioController {
       return "redirect:/consultas/listar";
     }
     return "redirect:login";
+  }
+
+  @GetMapping("/cadastro")
+  public String cadastro() {
+    return "cadastroUsuario";
+  }
+
+  @PostMapping("/cadastrar")
+  public String criarUsuario(CadastroUsuarioDTO usuario) {
+    try {
+      this.usuarioService.criarUsuario(usuario);
+      System.out.println("Cadastro realizado com sucesso!");
+      return "redirect:/usuario/login";
+    } catch (Exception e) {
+      e.printStackTrace(); 
+      return "redirect:/usuario/cadastro";
+    }
   }
 }

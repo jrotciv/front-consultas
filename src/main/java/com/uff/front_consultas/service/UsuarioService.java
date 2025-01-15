@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.uff.front_consultas.dto.Token;
+import com.uff.front_consultas.dto.CadastroUsuarioDTO;
 
 @Service
 public class UsuarioService {
@@ -29,5 +30,16 @@ public class UsuarioService {
     var result = rt.postForObject("http://localhost:8080/usuarios/login", request, Token.class);
     
     return result;
+  }
+
+  public void criarUsuario(CadastroUsuarioDTO usuario) {
+    RestTemplate rt = new RestTemplate();
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+
+    HttpEntity<CadastroUsuarioDTO> request = new HttpEntity<>(usuario, headers);
+
+    rt.postForEntity("http://localhost:8080/usuarios/cadastrar", request, Void.class);
   }
 }
