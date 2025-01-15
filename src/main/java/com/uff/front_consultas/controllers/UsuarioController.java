@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.uff.front_consultas.service.UsuarioService;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,8 +26,13 @@ public class UsuarioController {
   }
 
   @PostMapping("/signIn")
-  public String signIn(String email, String senha) {
-    this.usuarioService.login(email, senha);
+  public String signIn(String email, String senha, HttpSession session) {
+    var token = this.usuarioService.login(email, senha);
+
+    if (token != null) {
+      session.setAttribute("token", token.getToken());
+      return "redirect:/consultas/listar";
+    }
     return "redirect:login";
   }
 }
