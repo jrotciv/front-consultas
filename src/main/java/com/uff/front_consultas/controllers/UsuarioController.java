@@ -31,6 +31,7 @@ public class UsuarioController {
 
     if (token != null) {
       session.setAttribute("token", token.getToken());
+      session.setAttribute("tipo_usuario", token.getType());
       return "redirect:/consultas/listar";
     }
     return "redirect:login";
