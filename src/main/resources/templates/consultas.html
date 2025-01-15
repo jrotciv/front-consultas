@@ -81,6 +81,48 @@
             </tbody>
         </table>
     </div>
+    <div class="table-container text-end">
+        <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#createConsultaModal">
+            Criar Consulta
+        </button>
+    </div>
+    
+        <!-- Modal -->
+    <div class="modal fade" id="createConsultaModal" tabindex="-1" aria-labelledby="createConsultaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/consultas" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createConsultaModalLabel">Criar Nova Consulta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="medico_cpf" class="form-label">CPF do Médico</label>
+                            <input type="text" class="form-control" id="medico_cpf" name="medicoCpf" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="paciente_cpf" class="form-label">CPF do Paciente</label>
+                            <input type="text" class="form-control" id="paciente_cpf" name="pacienteCpf" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="data" class="form-label">Data</label>
+                            <input type="date" class="form-control" id="data" name="data" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="horario" class="form-label">Horário</label>
+                            <input type="time" class="form-control" id="horario" name="horario" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>Desenvolvimento Web avançado 2025 - Sistema de Consultas</p>
     </footer>

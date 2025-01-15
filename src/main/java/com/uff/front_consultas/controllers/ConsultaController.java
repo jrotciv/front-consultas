@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.uff.front_consultas.dto.CriarConsultaDTO;
 import com.uff.front_consultas.models.Consulta;
 import com.uff.front_consultas.service.ConsultaService;
 
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -39,4 +42,19 @@ public class ConsultaController {
     }
   }
   
+  @PostMapping
+  public String criarConsulta(@ModelAttribute CriarConsultaDTO  novaConsulta, HttpSession session, Model model) {
+    String token = (String) session.getAttribute("token");
+    if (token == null) {
+        return "redirect:/usuario/login";
+    }
+
+    try {
+        consultaService.criarConsulta(novaConsulta, token);
+        return "redirect:/consultas/listar";
+    } catch (Exception e) {
+        model.addAttribute("erro", "Não foi possível criar a consulta.");
+        return "erro";
+    }
+  }
 }
