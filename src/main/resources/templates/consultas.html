@@ -80,7 +80,6 @@
                     <th>Sintomas</th>
                     <th>Diagnóstico</th>
                     <th>Observações</th>
-                    <th>Médico</th>
                     <th th:if="${session.tipo_usuario != 'Paciente'}">Paciente</th>
                     <th th:if="${session.tipo_usuario != 'Paciente'}">Ações</th>
                 </tr>
@@ -104,7 +103,7 @@
                     <td th:text="${consulta.sintomas}"></td>
                     <td th:text="${consulta.diagnostico}"></td>
                     <td th:text="${consulta.observacoes}"></td>
-                    <td th:text="${consulta.medico.nome}"></td>
+                    <td th:text="${consulta.medico.nome}"th:if="${session.tipo_usuario == 'Paciente'}"></td>
                     <td th:text="${consulta.paciente.nome}" th:if="${session.tipo_usuario != 'Paciente'}"></td>
                     <td th:if="${session.tipo_usuario == 'Medico'}">
                         <button type="button" class="btn btn-custom btn-sm" data-bs-toggle="modal" data-bs-target="#editConsultaModal"
