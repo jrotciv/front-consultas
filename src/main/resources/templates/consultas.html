@@ -24,6 +24,7 @@
         }
         header h1 {
             margin: 0;
+            padding-right: 1360px;
         }
         .table-container {
             margin: 20px auto;
@@ -48,9 +49,18 @@
 </head>
 <body>
     <header>
-        <h1>Consultas</h1>
-        <a href="http://localhost:8082/usuario/login" class="btn btn-danger btn-sm">Sair</a>
-    </header>
+        <div class="navbar">
+            <div class="d-flex justify-content-between w-100">
+                <h1 class="me-auto">Consultas</h1>
+                <div class="d-flex align-items-center">
+                    <span class="me-3" th:if="${session.tipo_usuario == 'Paciente'}" th:text="'Bem-vindo, ' + ${consultas[0].paciente.nome}"></span>
+                    <span class="me-3" th:if="${session.tipo_usuario == 'Medico'}" th:text="'Bem-vindo, ' + ${consultas[0].medico.nome}"></span>
+                    <span class="badge text-bg-primary me-3" th:text="${session.tipo_usuario}"></span>
+                    <a href="http://localhost:8082/usuario/login" class="btn btn-danger btn-sm">Sair</a>
+                </div>
+            </div>
+        </div>
+    </header>           
     <div class="table-container">
         <div class="filter-container mb-4">
             <form action="/consultas/listar" method="get" class="d-flex justify-content-start align-items-center">
