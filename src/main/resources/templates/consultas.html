@@ -53,8 +53,8 @@
             <div class="d-flex justify-content-between w-100">
                 <h1 class="me-auto">Consultas</h1>
                 <div class="d-flex align-items-center">
-                    <span class="me-3" th:if="${session.tipo_usuario == 'Paciente'}" th:text="'Bem-vindo, ' + ${consultas[0].paciente.nome}"></span>
-                    <span class="me-3" th:if="${session.tipo_usuario == 'Medico'}" th:text="'Bem-vindo, ' + ${consultas[0].medico.nome}"></span>
+                    <span class="me-3" th:if="${session.tipo_usuario == 'Paciente'}" th:text="'Boas-vindas, ' + ${consultas[0].paciente.nome}"></span>
+                    <span class="me-3" th:if="${session.tipo_usuario == 'Medico'}" th:text="'Boas-vindas, ' + ${consultas[0].medico.nome}"></span>
                     <span class="badge text-bg-primary me-3" th:text="${session.tipo_usuario}"></span>
                     <a href="http://localhost:8082/usuario/login" class="btn btn-danger btn-sm">Sair</a>
                 </div>
