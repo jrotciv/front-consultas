@@ -17,7 +17,7 @@ import com.uff.front_consultas.models.Consulta;
 @Service
 public class ConsultaService {
 
-  public List<Consulta> listarConsultas(String token) {
+  public List<Consulta> listarConsultas(String token, String status) {
     RestTemplate rt = new RestTemplate();
 
     HttpHeaders headers = new HttpHeaders();
@@ -26,10 +26,11 @@ public class ConsultaService {
 
     HttpEntity<Void> request = new HttpEntity<>(headers);
 
-    ResponseEntity<Consulta[]> response = rt.exchange("http://localhost:8080/consultas?status=Pendente", HttpMethod.GET, request, Consulta[].class);
+    // Ajusta a URL com o parâmetro de status
+    ResponseEntity<Consulta[]> response = rt.exchange("http://localhost:8080/consultas?status=" + status, HttpMethod.GET, request, Consulta[].class);
 
     return Arrays.asList(response.getBody());
-  }
+}
 
   public void criarConsulta(CriarConsultaDTO consulta, String token) {
     RestTemplate rt = new RestTemplate();

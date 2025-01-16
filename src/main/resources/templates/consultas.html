@@ -52,6 +52,14 @@
         <a href="http://localhost:8082/usuario/login" class="btn btn-danger btn-sm">Sair</a>
     </header>
     <div class="table-container">
+        <div class="filter-container">
+            <label for="statusFilter" class="form-label">Filtrar por Status</label>
+            <select id="statusFilter" class="form-select" onchange="filtrarConsultas()">
+                <option value="Pendente" selected>Pendente</option>
+                <option value="Conncluida">Concluida</option>
+                <option value="Cancelada">Cancelada</option>
+            </select>
+        </div>
         <table class="table table-striped table-hover">
             <thead class="table-dark">
                 <tr th:if="${session.tipo_usuario != 'Paciente'}">
@@ -186,6 +194,14 @@
     <footer>
         <p>Desenvolvimento Web avançado 2025 - Sistema de Consultas</p>
     </footer>
+    <script>
+        function filtrarConsultas() {
+            const status = document.getElementById('statusFilter').value;
+            // Redireciona para o mesmo endpoint com o novo parâmetro 'status'
+            window.location.href = '/consultas/listar?status=' + status;
+        }
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
